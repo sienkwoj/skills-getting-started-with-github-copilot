@@ -20,6 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
         activityCard.className = "activity-card";
 
         const spotsLeft = details.max_participants - details.participants.length;
+        const occupancyPercentage = details.max_participants > 0
+          ? Math.min(100, Math.round((details.participants.length / details.max_participants) * 100))
+          : 0;
         const participantsList = details.participants.length
           ? `<ul>${details.participants.map((participant) => `
               <li class="participant-row">
@@ -33,6 +36,15 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          <div class="capacity">
+            <div class="capacity-label">
+              <strong>Capacity used</strong>
+              <span>${occupancyPercentage}%</span>
+            </div>
+            <div class="capacity-bar" role="progressbar" aria-valuenow="${occupancyPercentage}" aria-valuemin="0" aria-valuemax="100" aria-label="${occupancyPercentage}% of places used">
+              <div class="capacity-fill" style="width: ${occupancyPercentage}%"></div>
+            </div>
+          </div>
           <div class="participants">
             <h5>Participants</h5>
             ${participantsList}
