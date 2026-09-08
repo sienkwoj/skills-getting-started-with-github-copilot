@@ -107,6 +107,10 @@ section h3 {
   transition: width 0.3s ease;
 }
 
+.capacity-fill-warning {
+  background: #b85c5c;
+}
+
 .participants {
   margin-top: 14px;
   padding-top: 12px;

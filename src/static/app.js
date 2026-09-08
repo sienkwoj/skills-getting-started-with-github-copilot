@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const occupancyPercentage = details.max_participants > 0
           ? Math.min(100, Math.round((details.participants.length / details.max_participants) * 100))
           : 0;
+        const capacityClass = occupancyPercentage > 80 ? " capacity-fill-warning" : "";
         const participantsList = details.participants.length
           ? `<ul>${details.participants.map((participant) => `
               <li class="participant-row">
@@ -42,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <span>${occupancyPercentage}%</span>
             </div>
             <div class="capacity-bar" role="progressbar" aria-valuenow="${occupancyPercentage}" aria-valuemin="0" aria-valuemax="100" aria-label="${occupancyPercentage}% of places used">
-              <div class="capacity-fill" style="width: ${occupancyPercentage}%"></div>
+              <div class="capacity-fill${capacityClass}" style="width: ${occupancyPercentage}%"></div>
             </div>
           </div>
           <div class="participants">
